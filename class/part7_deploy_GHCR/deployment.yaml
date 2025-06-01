@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+  namespace: fastapi-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mydemoapp
+  template:
+    metadata:
+      labels:
+        app: mydemoapp
+    spec:
+      containers:
+        - name: mycontainer
+          image: ghcr.io/marianafidalgo/infraautomation:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+      imagePullSecrets:
+        - name: ghcr-secret

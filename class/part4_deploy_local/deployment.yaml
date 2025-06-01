@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+  namespace: fastapi-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mydemoapp
+  template:
+    metadata:
+      labels:
+        app: mydemoapp
+    spec:
+      containers:
+        - name: mycontainer
+          image: myimage:latest
+          imagePullPolicy: IfNotPresent # Needs to be set to IfNotPresent for local testing
+          ports:
+            - containerPort: 8000
